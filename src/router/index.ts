@@ -6,8 +6,19 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   {
     path: "/",
-    name: "home",
-    component: () => import("../views/HomeView.vue"),
+    name: "Dashboard",
+    component: () => import("../views/DashboardView.vue"),
+    meta: {
+      title: "Dashboard",
+    },
+  },
+  {
+    path: "/tasks",
+    name: "Tasks",
+    component: () => import("../views/TasksView.vue"),
+    meta: {
+      title: "Tasks",
+    },
   },
 ];
 
