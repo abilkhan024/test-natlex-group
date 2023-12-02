@@ -11,6 +11,11 @@
   gap: 16px;
 }
 
-.v-app-bar {
+.v-app-bar,
+.v-footer {
   z-index: 12 !important;
+}
+
+.v-skeleton-loader--image-full .v-skeleton-loader__bone {
+  height: 100%;
 }

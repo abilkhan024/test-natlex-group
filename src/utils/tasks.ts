@@ -1,5 +1,6 @@
 import { Task } from "@/services/tasks";
 import dayjs from "dayjs";
+import { groupArrayBySameKey } from "./shared";
 
 export function getTasksPerDayStats(tasks: Task[]) {
   const tasksCreatedByDay: Record<string, number> = {};
@@ -22,4 +23,12 @@ export function getTasksPerDayStats(tasks: Task[]) {
   }
 
   return tasksCreatedByDay;
+}
+
+export function getTasksCountBySameStatus(tasks: Task[]) {
+  return Object.fromEntries(
+    Object.entries(groupArrayBySameKey(tasks, "status")).map(
+      ([status, tasks]) => [status, tasks.length]
+    )
+  );
 }

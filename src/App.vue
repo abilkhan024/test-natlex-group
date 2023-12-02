@@ -46,7 +46,8 @@ const drawerOpen = ref(false);
         <div class="py-3">
           <h3 class="mb-2">Test assignment for "Natlex Group"</h3>
 
-          <div class="d-flex flex-wrap gap-2">
+          <div class="d-flex align-center flex-wrap gap-2">
+            <b>Build with:</b>
             <v-chip v-for="library in techStack" :key="library">{{
               library
             }}</v-chip>

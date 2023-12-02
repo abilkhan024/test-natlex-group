@@ -8,7 +8,7 @@ const props = defineProps<{ tasks: Task[] }>();
 
 const statsData = computed(() => getTasksPerDayStats(props.tasks));
 const options = computed(() => ({
-  chart: { type: "area" },
+  chart: { type: "area", toolbar: { show: false } },
   theme: { mode: vuetify?.preset?.theme?.dark ? "dark" : "light" },
   dataLabels: { enabled: false },
   title: {
@@ -18,20 +18,14 @@ const options = computed(() => ({
     style: { fontSize: "18px" },
   },
   stroke: { curve: "smooth" },
-  xaxis: {
-    type: "datetime",
-    categories: Object.keys(statsData.value),
-  },
+  xaxis: { type: "datetime", categories: Object.keys(statsData.value) },
   tooltip: { x: { format: "dd.MM.yy HH:mm" } },
 }));
 const series = computed(() => [
-  {
-    name: "Tasks created",
-    data: Object.values(statsData.value),
-  },
+  { name: "Tasks created", data: Object.values(statsData.value) },
 ]);
 </script>
 
 <template>
-  <a-chart :options="options" :series="series"></a-chart>
+  <a-chart v-bind="$attrs" :options="options" :series="series"></a-chart>
 </template>
