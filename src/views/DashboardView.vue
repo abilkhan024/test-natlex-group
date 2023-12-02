@@ -1,26 +1,49 @@
 <script lang="ts" setup>
 import { useTasks } from "@/store/modules/tasks/composables";
 import { useLoader } from "@/composables/loader";
+import TasksPerDayStats from "@/components/Tasks/Stats/TasksPerDayStats.vue";
 
 const { tasksLists, getTasks } = useTasks();
 const [loading] = useLoader(getTasks());
-const options = {};
-const series = [
-  {
-    name: "series-1",
-    data: [30, 40, 45, 50, 49, 60, 70, 91],
-  },
-];
 </script>
 
 <template>
   <div>
-    {{ tasksLists }}
-    <a-chart
-      width="500"
-      type="bar"
-      :options="options"
-      :series="series"
-    ></a-chart>
+    <v-row class="d-md-flex d-block" no-gutters>
+      <v-col class="pa-3">
+        <v-skeleton-loader
+          v-if="loading"
+          height="200"
+          type="card"
+        ></v-skeleton-loader>
+        <TasksPerDayStats v-else :tasks="tasksLists" />
+      </v-col>
+      <v-col class="pa-3">
+        <v-skeleton-loader
+          v-if="loading"
+          height="200"
+          type="card"
+        ></v-skeleton-loader>
+        <TasksPerDayStats v-else :tasks="tasksLists" />
+      </v-col>
+    </v-row>
+    <v-row class="d-md-flex d-block" no-gutters>
+      <v-col class="pa-3">
+        <v-skeleton-loader
+          v-if="loading"
+          height="200"
+          type="card"
+        ></v-skeleton-loader>
+        <TasksPerDayStats v-else :tasks="tasksLists" />
+      </v-col>
+      <v-col class="pa-3">
+        <v-skeleton-loader
+          v-if="loading"
+          height="200"
+          type="card"
+        ></v-skeleton-loader>
+        <TasksPerDayStats v-else :tasks="tasksLists" />
+      </v-col>
+    </v-row>
   </div>
 </template>

@@ -10,3 +10,7 @@
 .gap-4 {
   gap: 16px;
 }
+
+.v-app-bar {
+  z-index: 12 !important;
+}

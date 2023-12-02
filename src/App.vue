@@ -16,7 +16,7 @@ const drawerOpen = ref(false);
     <v-navigation-drawer v-model="drawerOpen" app>
       <v-col>
         <nav>
-          <v-list dense nav>
+          <v-list dense nav class="mt-14 mt-lg-0">
             <v-list-item v-for="route in routes" :key="route.title" link>
               <v-list-item-content>
                 <RouterLink class="text-h5" :to="route.link">
