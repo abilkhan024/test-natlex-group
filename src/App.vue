@@ -9,7 +9,7 @@ const routes = [
   { link: "/tasks", title: "My tasks" },
 ];
 
-store.dispatch(TasksModuleActions.GET_LIST)
+store.dispatch(TasksModuleActions.GET_LIST);
 const drawerOpen = ref(false);
 </script>
 
@@ -17,13 +17,13 @@ const drawerOpen = ref(false);
   <v-app>
     <v-navigation-drawer v-model="drawerOpen" app>
       <v-col>
-        <nav class="pt-4">
+        <nav>
           <v-list dense nav>
             <v-list-item v-for="route in routes" :key="route.title" link>
               <v-list-item-content>
                 <RouterLink class="text-h5" :to="route.link">
-                  {{ route.title }}</RouterLink
-                >
+                  {{ route.title }}
+                </RouterLink>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -32,8 +32,11 @@ const drawerOpen = ref(false);
     </v-navigation-drawer>
 
     <v-app-bar app>
-      <h1 class="text-h6 text-md-h4">
-        Natlex Group task manager | {{ $route?.meta?.title }}
+      <v-btn class="mr-4" @click="drawerOpen = !drawerOpen">
+        <v-icon>mdi-menu</v-icon>
+      </v-btn>
+      <h1 class="text-h6 text-md-h5 font-weight-bold">
+        {{ $route?.meta?.title }}
       </h1>
     </v-app-bar>
 
@@ -42,13 +45,15 @@ const drawerOpen = ref(false);
         <router-view></router-view>
       </v-container>
       <v-footer app>
-        <v-row class="px-3 py-3">
-          <h3>Stack for this assignment:</h3>
+        <div class="py-3">
+          <h3 class="mb-2">Test assignment for "Natlex Group"</h3>
 
-          <v-chip v-for="library in techStack" class="ml-3" :key="library">{{
-            library
-          }}</v-chip>
-        </v-row>
+          <div class="d-flex flex-wrap gap-2">
+            <v-chip v-for="library in techStack" :key="library">{{
+              library
+            }}</v-chip>
+          </div>
+        </div>
       </v-footer>
     </v-main>
   </v-app>
