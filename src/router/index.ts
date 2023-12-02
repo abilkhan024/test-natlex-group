@@ -8,17 +8,13 @@ const routes: Array<RouteConfig> = [
     path: "/",
     name: "Dashboard",
     component: () => import("../views/DashboardView.vue"),
-    meta: {
-      title: "Dashboard",
-    },
+    meta: { title: "Dashboard" },
   },
   {
     path: "/tasks",
     name: "Tasks",
     component: () => import("../views/TasksView.vue"),
-    meta: {
-      title: "Tasks",
-    },
+    meta: { title: "Tasks" },
   },
 ];
 

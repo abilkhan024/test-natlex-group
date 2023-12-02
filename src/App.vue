@@ -1,15 +1,13 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import store from "./store";
-import { TasksModuleActions } from "./store/modules/tasks/type";
 
 const techStack = ["Vue", "VueX", "Vuetify"];
+
 const routes = [
   { link: "/", title: "Dashboard" },
   { link: "/tasks", title: "My tasks" },
 ];
 
-store.dispatch(TasksModuleActions.GET_LIST);
 const drawerOpen = ref(false);
 </script>
 

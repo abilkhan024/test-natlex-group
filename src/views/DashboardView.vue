@@ -1,4 +1,9 @@
 <script lang="ts" setup>
+import { useTasks } from "@/store/modules/tasks/composables";
+import { useLoader } from "@/composables/loader";
+
+const { tasksLists, getTasks } = useTasks();
+const [loading] = useLoader(getTasks());
 const options = {};
 const series = [
   {
@@ -10,6 +15,7 @@ const series = [
 
 <template>
   <div>
+    {{ tasksLists }}
     <a-chart
       width="500"
       type="bar"
