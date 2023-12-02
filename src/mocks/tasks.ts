@@ -12,11 +12,11 @@ const _mockTasks: Task[] = [];
  * Implement logic to check local storage for edits, deletes, and creations
  */
 for (let i = 1; i <= 24; i++) {
-  if (i % 3 === 0) {
+  if (i % 3 !== 0) {
     _mockTasks.push({
       id: i,
       title: "Title " + i,
-      body: "Heading for body",
+      body: "Heading for body" + i,
       createdAt: dayjs().subtract(i, "d").toISOString(),
       updatedAt: dayjs()
         .subtract(i - 1, "d")

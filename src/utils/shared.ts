@@ -12,6 +12,13 @@ export function getRandomNumber(min: number, max: number): number {
   return randomNumber;
 }
 
+export function normalizeString(str: string) {
+  if (str.length === 0) return str;
+  const firstLetter = str[0].toUpperCase();
+  const restOfStr = str.slice(1);
+  return firstLetter + restOfStr.toLowerCase();
+}
+
 export function groupArrayBySameKey<
   T extends Record<string, any>,
   K extends keyof T

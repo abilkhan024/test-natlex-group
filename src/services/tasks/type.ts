@@ -4,6 +4,5 @@ export type Task = {
   body: string;
   createdAt: string;
   updatedAt: string;
-  // Allow user to customize
   status: string;
 };

@@ -30,7 +30,7 @@ const drawerOpen = ref(false);
     </v-navigation-drawer>
 
     <v-app-bar app>
-      <v-btn class="mr-4" @click="drawerOpen = !drawerOpen">
+      <v-btn color="primary" class="mr-4" @click="drawerOpen = !drawerOpen">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
       <h1 class="text-h6 text-md-h5 font-weight-bold">
@@ -48,7 +48,7 @@ const drawerOpen = ref(false);
 
           <div class="d-flex align-center flex-wrap gap-2">
             <b>Build with:</b>
-            <v-chip v-for="library in techStack" :key="library">{{
+            <v-chip color="green" v-for="library in techStack" :key="library">{{
               library
             }}</v-chip>
           </div>
