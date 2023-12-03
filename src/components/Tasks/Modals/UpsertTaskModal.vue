@@ -13,7 +13,7 @@ const defaultValues: TaskCreateData = {
   status: TASKS_STATUSES[0],
 };
 const getDefaultValue = () =>
-  isEdit.value ? { ...props.task } : { ...defaultValues };
+  isEdit.value ? ({ ...props.task } as TaskCreateData) : { ...defaultValues };
 const formData = ref<TaskCreateData>(getDefaultValue());
 const taskStatuses = computed(() =>
   TASKS_STATUSES.map((status) => ({
@@ -36,7 +36,7 @@ const modelBinding = computed({
       <slot name="activator" v-bind="props" />
     </template>
     <v-card>
-      <v-card-title>
+      <v-card-title class="pa-4">
         <span class="text-h5">{{ isEdit ? "Edit task" : "New task" }}</span>
       </v-card-title>
       <v-container class="px-4">
@@ -53,14 +53,10 @@ const modelBinding = computed({
           required
         ></v-select>
       </v-container>
-      <v-card-actions>
+      <v-card-actions class="pb-4">
+        <v-btn color="error" @click="modelBinding = false"> Close </v-btn>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" text @click="modelBinding = false">
-          Close
-        </v-btn>
-        <v-btn color="blue darken-1" text @click="modelBinding = false">
-          Save
-        </v-btn>
+        <v-btn color="primary" @click="modelBinding = false"> Save </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
