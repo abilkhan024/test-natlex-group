@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
+import { useAlerts } from "./store/modules/ui/composables";
 
 const techStack = ["Vue", "VueX", "Vuetify"];
 
@@ -7,12 +8,23 @@ const routes = [
   { link: "/", title: "Dashboard" },
   { link: "/tasks", title: "My tasks" },
 ];
+const { alertsList } = useAlerts();
 
 const drawerOpen = ref(false);
 </script>
 
 <template>
   <v-app>
+    <div class="v-alerts__container">
+      <v-alert
+        v-for="alert in alertsList"
+        :key="alert.id"
+        :type="alert.type"
+        dense
+      >
+        {{ alert.text }}
+      </v-alert>
+    </div>
     <v-navigation-drawer v-model="drawerOpen" app>
       <v-col>
         <nav>

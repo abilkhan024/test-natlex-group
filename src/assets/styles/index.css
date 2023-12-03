@@ -19,3 +19,10 @@
 .v-skeleton-loader--image-full .v-skeleton-loader__bone {
   height: 100%;
 }
+
+.v-alerts__container {
+  z-index: 999;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}

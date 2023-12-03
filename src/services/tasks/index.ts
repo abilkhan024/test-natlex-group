@@ -1,5 +1,5 @@
 import { TASKS_LOCAL_STORAGE_KEY } from "@/constants/tasks";
-import { _mockTasks } from "@/mocks/tasks";
+import { getMockTasks } from "@/mocks/tasks";
 import { getRandomNumber, resolveAfter } from "@/utils/shared";
 import dayjs from "dayjs";
 import { TaskCreateData, TaskEditData, Task } from "./type";
@@ -12,10 +12,11 @@ const tasksService = {
 
     const targetIndex = previousList.findIndex((task) => task.id === id);
     if (targetIndex === -1) {
-      return resolveAfter(getRandomNumber(400, 700), { success: false });
+      return resolveAfter(getRandomNumber(100, 300), { success: false });
     }
-    previousList.splice(targetIndex);
-    return resolveAfter(getRandomNumber(400, 700), { success: true });
+    previousList.splice(targetIndex, 1);
+    localStorage.setItem(TASKS_LOCAL_STORAGE_KEY, JSON.stringify(previousList));
+    return resolveAfter(getRandomNumber(100, 300), { success: true });
   },
   create: (data: TaskCreateData) => {
     const previousList: Task[] = JSON.parse(
@@ -28,9 +29,9 @@ const tasksService = {
       updatedAt: dayjs().toISOString(),
     });
     localStorage.setItem(TASKS_LOCAL_STORAGE_KEY, JSON.stringify(previousList));
-    return resolveAfter(getRandomNumber(400, 700), { success: true });
+    return resolveAfter(getRandomNumber(100, 300), { success: true });
   },
-  getList: () => resolveAfter(getRandomNumber(400, 700), _mockTasks),
+  getList: () => resolveAfter(getRandomNumber(400, 700), getMockTasks()),
   editById: (data: TaskEditData) => {
     const previousList: Task[] = JSON.parse(
       localStorage.getItem(TASKS_LOCAL_STORAGE_KEY)!
@@ -45,7 +46,7 @@ const tasksService = {
       }
     }
     localStorage.setItem(TASKS_LOCAL_STORAGE_KEY, JSON.stringify(previousList));
-    return resolveAfter(getRandomNumber(400, 700), { success: true });
+    return resolveAfter(getRandomNumber(100, 300), { success: true });
   },
 };
 

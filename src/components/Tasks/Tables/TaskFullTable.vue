@@ -1,11 +1,16 @@
 <script lang="ts" setup>
 import { Task } from "@/services/tasks";
+import { CommonResponse } from "@/services/type";
 import { normalizeString } from "@/utils/shared";
 import { formatToReadbableDate } from "@/utils/date";
 import { ref } from "vue";
 import UpsertTaskModal from "@/components/Tasks/Modals/UpsertTaskModal.vue";
 import ConfimModal from "@/components/Shared/Modals/ConfimModal.vue";
+import { useAlerts } from "@/store/modules/ui/composables";
+import store from "@/store";
+import { TasksActions } from "@/store/modules/tasks/type";
 
+const { success, error } = useAlerts();
 const props = defineProps<{ tasks: Task[] }>();
 
 const headers = [
@@ -14,8 +19,8 @@ const headers = [
   { text: "Created at", value: "createdAt" },
   { text: "Updated at", value: "updatedAt" },
   { text: "Status", value: "status" },
-  { text: "Edit", value: "edit" },
-  { text: "Delete", value: "delete" },
+  { text: "Edit", value: "edit", sortable: false },
+  { text: "Delete", value: "delete", sortable: false },
 ];
 
 const upsertModalIsOpen = ref(false);
@@ -35,7 +40,17 @@ const promptDeleteTask = (task: Task) => {
   taskToDelete.value = task;
   deleteModalIsOpen.value = true;
 };
-const deleteTask = async () => {};
+const deleteTask = async () => {
+  const result: CommonResponse = await store.dispatch(
+    TasksActions.DELETE_BY_ID,
+    taskToDelete.value?.id
+  );
+  if (result.success) {
+    success("Deleted successfully");
+  } else {
+    error("Error while deleting");
+  }
+};
 </script>
 
 <template>

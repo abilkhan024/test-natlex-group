@@ -24,8 +24,6 @@ const getters = {
 
 const actions = {
   async [TasksActions.GET_LIST](ctx: TasksActionContext) {
-    const potentialCache = ctx.getters[TasksGetters.LIST];
-    if (potentialCache.length) return potentialCache;
     const result = await taskService.getList();
     ctx.commit(TasksMutations.SET_LIST, result);
     return result;
