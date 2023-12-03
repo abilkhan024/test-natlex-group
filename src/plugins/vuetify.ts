@@ -15,6 +15,6 @@ const isLightPreffered = window.matchMedia(
 const isDarkPreffered =
   hasMatchMediaApi && hasPreferedColorScheme && !isLightPreffered;
 
-const vuetify = new Vuetify({ theme: { dark: isDarkPreffered } });
+const vuetify = new Vuetify({ theme: { dark: false } });
 
 export default vuetify;

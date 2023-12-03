@@ -3,6 +3,7 @@ import { Task } from "@/services/tasks";
 import { normalizeString } from "@/utils/shared";
 import { formatToReadbableDate } from "@/utils/date";
 import { ref } from "vue";
+import UpsertTaskModal from "@/components/Tasks/Modals/UpsertTaskModal.vue";
 
 const props = defineProps<{ tasks: Task[] }>();
 
@@ -16,24 +17,30 @@ const headers = [
   { text: "Delete", value: "delete" },
 ];
 
-const createModalIsOpen = ref(false);
+const upsertModalIsOpen = ref(false);
+const taskToEdit = ref<null | Task>(null);
+const editTask = (task: Task) => {
+  taskToEdit.value = task;
+  upsertModalIsOpen.value = true;
+};
+const createTask = () => {
+  taskToEdit.value = null;
+  upsertModalIsOpen.value = true;
+};
 </script>
 
 <template>
   <div>
+    <UpsertTaskModal :task="taskToEdit" v-model="upsertModalIsOpen" />
     <v-data-table :headers="headers" :items-per-page="-1" :items="tasks">
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>My tasks</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
-          <v-dialog v-model="createModalIsOpen" max-width="500px">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                New task
-              </v-btn>
-            </template>
-          </v-dialog>
+          <v-btn color="primary" dark class="mb-2" @click="createTask">
+            New task
+          </v-btn>
         </v-toolbar>
       </template>
       <template #item.createdAt="{ value }">
@@ -46,8 +53,8 @@ const createModalIsOpen = ref(false);
         {{ normalizeString(value) }}
       </template>
       <template #item.edit="{ item }">
-        <v-btn block color="cyan">
-          <v-icon>mdi-pencil</v-icon>
+        <v-btn @click="editTask(item)" block color="cyan">
+          <v-icon color="white">mdi-pencil</v-icon>
         </v-btn>
       </template>
       <template #item.delete="{ item }">

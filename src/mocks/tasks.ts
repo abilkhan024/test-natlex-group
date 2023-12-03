@@ -1,29 +1,32 @@
+import { TASKS_LOCAL_STORAGE_KEY, TASKS_STATUSES } from "@/constants/tasks";
 import { Task } from "@/services/tasks";
+import { getRandomNumber, safeJsonParse } from "@/utils/shared";
 import dayjs from "dayjs";
 
 const _mockTasks: Task[] = [];
+const storedTasksJson = localStorage.getItem(TASKS_LOCAL_STORAGE_KEY);
 
-/**
- * @description
- * Could add random logic,
- * but want to make updates and delete more predictable
- * ---
- * @todo
- * Implement logic to check local storage for edits, deletes, and creations
- */
-for (let i = 1; i <= 24; i++) {
-  if (i % 3 !== 0) {
+if (storedTasksJson) {
+  const storedTasks = safeJsonParse<Task[]>(storedTasksJson);
+  if (storedTasks) _mockTasks.push(...storedTasks);
+} else {
+  let tasksCount = getRandomNumber(40, 50);
+  while (tasksCount) {
     _mockTasks.push({
-      id: i,
-      title: "Title " + i,
-      body: "Heading for body" + i,
-      createdAt: dayjs().subtract(i, "d").toISOString(),
-      updatedAt: dayjs()
-        .subtract(i - 1, "d")
+      id: tasksCount,
+      body: "Lorem ipsum " + tasksCount,
+      title: "Not lorem ipsum title " + tasksCount,
+      status: TASKS_STATUSES[getRandomNumber(0, 2)] ?? "",
+      createdAt: dayjs()
+        .subtract(getRandomNumber(300, 10000), "m")
         .toISOString(),
-      status: i % 5 === 0 ? "SKIPPED" : "COMPLETED",
+      updatedAt: dayjs()
+        .subtract(getRandomNumber(300, 10000), "m")
+        .toISOString(),
     });
+    tasksCount--;
   }
+  localStorage.setItem(TASKS_LOCAL_STORAGE_KEY, JSON.stringify(_mockTasks));
 }
 
 export { _mockTasks };

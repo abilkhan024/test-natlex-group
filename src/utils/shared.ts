@@ -9,14 +9,22 @@ export function resolveAfter<T>(ms: number, value: T): Promise<T> {
 export function getRandomNumber(min: number, max: number): number {
   const randomDecimal = Math.random();
   const randomNumber = min + randomDecimal * (max - min);
-  return randomNumber;
+  return Math.round(randomNumber);
+}
+
+export function safeJsonParse<T>(json: string): T | null {
+  try {
+    return JSON.parse(json) as T | null;
+  } catch {
+    return null;
+  }
 }
 
 export function normalizeString(str: string) {
   if (str.length === 0) return str;
   const firstLetter = str[0].toUpperCase();
   const restOfStr = str.slice(1);
-  return firstLetter + restOfStr.toLowerCase();
+  return firstLetter + restOfStr.toLowerCase().replaceAll("_", " ");
 }
 
 export function groupArrayBySameKey<

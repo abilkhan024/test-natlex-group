@@ -1,6 +1,6 @@
 import { Task } from "@/services/tasks";
 import dayjs from "dayjs";
-import { groupArrayBySameKey } from "./shared";
+import { groupArrayBySameKey, normalizeString } from "./shared";
 
 export function getTasksPerDayStats(tasks: Task[]) {
   const tasksCreatedByDay: Record<string, number> = {};
@@ -14,12 +14,12 @@ export function getTasksPerDayStats(tasks: Task[]) {
 
   let currentDate = dayjs(minDate);
   while (currentDate.isBefore(dayjs(maxDate).add(1, "day"), "day")) {
-    tasksCreatedByDay[currentDate.toISOString()] = 0;
+    tasksCreatedByDay[currentDate.format("YYYY-MM-DD")] = 0;
     currentDate = currentDate.add(1, "day");
   }
 
   for (let task of tasks) {
-    tasksCreatedByDay[dayjs(task.createdAt).toISOString()]++;
+    tasksCreatedByDay[dayjs(task.createdAt).format("YYYY-MM-DD")]++;
   }
 
   return tasksCreatedByDay;
@@ -28,7 +28,7 @@ export function getTasksPerDayStats(tasks: Task[]) {
 export function getTasksCountBySameStatus(tasks: Task[]) {
   return Object.fromEntries(
     Object.entries(groupArrayBySameKey(tasks, "status")).map(
-      ([status, tasks]) => [status, tasks.length]
+      ([status, tasks]) => [normalizeString(status), tasks.length]
     )
   );
 }
