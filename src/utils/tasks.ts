@@ -5,6 +5,8 @@ import { groupArrayBySameKey, normalizeString } from "./shared";
 export function getTasksPerDayStats(tasks: Task[]) {
   const tasksCreatedByDay: Record<string, number> = {};
 
+  if (!tasks.length) return tasksCreatedByDay;
+
   const sortedTasks = [...tasks].sort(
     (a, b) => dayjs(a.createdAt).unix() - dayjs(b.createdAt).unix()
   );
