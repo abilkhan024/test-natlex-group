@@ -51,8 +51,9 @@ const onSave = async () => {
       error("Error during save");
     }
   } catch (validationError) {
-    console.log(validationError);
-    error(validationError as string);
+    if (typeof validationError === "string") {
+      error(validationError);
+    }
   } finally {
     loading.value = false;
   }

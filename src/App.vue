@@ -59,10 +59,15 @@ const drawerOpen = ref(false);
           <h3 class="mb-2">Test assignment for "Natlex Group"</h3>
 
           <div class="d-flex align-center flex-wrap gap-2">
-            <b>Build with:</b>
-            <v-chip color="green" v-for="library in techStack" :key="library">{{
-              library
-            }}</v-chip>
+            <b>Main stack:</b>
+            <v-chip color="green" v-for="library in techStack" :key="library">
+              <span class="white--text font-weight-bold">{{ library }}</span>
+            </v-chip>
+            <v-chip color="green">
+              <span class="white--text font-weight-bold">
+                And more in package.json 😊
+              </span>
+            </v-chip>
           </div>
         </div>
       </v-footer>
