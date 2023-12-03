@@ -14,7 +14,7 @@
   state via
   [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 - Then we can view updated stats data back on dashboard page
-- Application is response from desktop to mobile, has dark theme support
+- Application is responsive from desktop to mobile, has dark theme support
 - Charts are configurable according to [Apexcharts
   docs](https://apexcharts.com/docs/options/chart). P.S: View options section
 
