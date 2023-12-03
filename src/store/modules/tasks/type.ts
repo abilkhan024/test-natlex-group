@@ -7,8 +7,8 @@ export type TasksState = {
 export enum TasksActions {
   CREATE = "TasksActions/CREATE",
   GET_LIST = "TasksActions/LIST",
-  UPDATE = "TasksActions/UPDATE",
-  DELETE = "TasksActions/DELETE",
+  EDIT_BY_ID = "TasksActions/EDIT_BY_ID",
+  DELETE_BY_ID = "TasksActions/DELETE_BY_ID",
   GET_BY_ID = "TasksActions/GET_BY_ID",
 }
 

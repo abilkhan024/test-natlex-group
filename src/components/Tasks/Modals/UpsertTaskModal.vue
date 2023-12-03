@@ -28,6 +28,10 @@ const modelBinding = computed({
   },
   set: (value: boolean) => emit("input", value),
 });
+
+const editTask = async () => {
+  
+}
 </script>
 
 <template>
